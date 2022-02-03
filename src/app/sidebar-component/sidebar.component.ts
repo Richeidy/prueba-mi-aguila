@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'sidebar-component',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  constructor() { }
+  @Input() user !: User;
+  
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
