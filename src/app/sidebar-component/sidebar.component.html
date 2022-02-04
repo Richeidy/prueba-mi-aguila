@@ -4,13 +4,17 @@
     </div>
     <div class="box-user">
         <div  class="box-user__img">
-             <img src="" alt="user">
+             <img [src]="user?.img" alt="user">
         </div>
-        <div class="box-user__name">
-  
-       <div class="user__rol">
-           
-       </div>
+        <div class="box-user__description">
+            <div class="box-user__description__name color-primary text-base">
+                {{ user?.name }}
+            </div>
+            <div class="box-user__description__rol color-light text-sm">
+                {{ user?.rol }}
+            </div>
+        </div>
+        <hr>
     </div>
     <div class="tabs">
  
