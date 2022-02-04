@@ -2,17 +2,18 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    padding: 10px;
+    font-family: Arimo;
+    .header {
+        padding: 10px;
+    }
     .box-user {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 30px 0;
-        font-family: Arimo;
+        margin: 30px 0 15px 0;
         .box-user__img {
             img {
                 width: 90px;
-                height: auto;
                 border-radius: 50%;
             }
         }
@@ -24,5 +25,31 @@
             width: 130px;
         }
     }
-    
+    .tabs-list__item {
+        border: 0;
+        display: inline-flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-radius: 1px;
+        .tabs-list__icon {
+            margin: 0 15px;
+        }
+    }
+    .tabs-list__item.active {
+        background: #e5e9ee;
+        .tabs-list__icon, .tabs-list__tilte {
+            color: #566a85;
+        }
+        .tabs-list__tilte{ 
+            font-weight: bold;
+        }
+        &::before {
+            content: ' ';
+            background: #0bce9d;
+            position: absolute;
+            left: 0px;
+            width: 5px;
+            height: 100%;
+        }
+    } 
 }

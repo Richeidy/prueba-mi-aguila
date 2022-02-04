@@ -16,7 +16,14 @@
         </div>
         <hr>
     </div>
-    <div class="tabs">
-       
+    <div class="tabs-list">
+       <ul *ngFor="let item of items" class="tabs-list__group list-group">
+           <li [class]="getClassItem(item.title)" (click)="activeItem(item.title)">
+               <mat-icon class="tabs-list__icon material-icons-outlined color-primary" aria-hidden="true">
+                   {{item?.icon}}
+                </mat-icon>
+               <div class="tabs-list__tilte color-primary text-base"> {{item?.title}}</div>
+           </li>
+       </ul>
     </div>
  </div>
