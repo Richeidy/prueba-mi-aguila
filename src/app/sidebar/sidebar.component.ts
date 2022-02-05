@@ -21,9 +21,8 @@ export class SidebarComponent implements OnInit {
     { 
       title: 'Pedir Aguila',
       icon: "directions_car",
-      route: "maps"
-    },
-    { 
+      route: "map"
+    },{ 
       title: 'Vuelos',
       icon: "place",
       route: "flights"
@@ -34,7 +33,7 @@ export class SidebarComponent implements OnInit {
     },{ 
       title: 'Administrar',
       icon: "settings",
-      route: "manage"
+      route: "settings"
     },{ 
       title: 'Estadísticas',
       icon: "leaderboard",
@@ -46,7 +45,7 @@ export class SidebarComponent implements OnInit {
     },{ 
       title: 'Cerrar sesion',
       icon: "logout",
-      route: "maps"
+      route: "logout"
     },
   ];
 

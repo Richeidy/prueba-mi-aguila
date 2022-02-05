@@ -1,0 +1,12 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arimo;
+    img {
+        width: 550px;
+    }
+    .message {
+        margin-top: 20px;
+    }
+}

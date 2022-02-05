@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from './models/user.model';
-import { UserService } from './services/user.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,24 +6,9 @@ import { UserService } from './services/user.service';
 })
 
 export class AppComponent implements OnInit{
-  
-  title = 'new-project';
-  user !: User;
-
-   constructor(
-    private userService:UserService
-  ) { }
+   
+  constructor() { }
 
   ngOnInit() {
-    this.getUser();
-    
   }
-
-  getUser() {
-    this.userService.getUser()
-      .subscribe(user => {
-        this.user = user;
-      });    
-  }
- 
 }

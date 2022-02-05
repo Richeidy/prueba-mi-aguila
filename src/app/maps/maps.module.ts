@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 
+import { MapsRoutingModule } from './maps-routing.module';
 import { SearchMenuModule } from './components/search-menu/search-menu.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { MapComponent } from './components/map/map.component';
 import { MapsPageComponent } from './maps-page/maps-page.component';
+
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { MapsPageComponent } from './maps-page/maps-page.component';
     CommonModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    SearchMenuModule
+    SearchMenuModule,
+    MapsRoutingModule
   ],
   exports: [
     MapsPageComponent

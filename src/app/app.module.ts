@@ -6,25 +6,19 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http'
  
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarModule } from './sidebar/sidebar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MapsModule } from './maps/maps.module';
-import { DefaultPageComponent } from './shared/default-page/default-page.component';
 import { ErrorRouteComponent } from './shared/error-route/error-route.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DefaultPageComponent,
-    ErrorRouteComponent,
+    ErrorRouteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    SidebarModule,
-    MapsModule,
     BrowserAnimationsModule
   ],
   providers: [],

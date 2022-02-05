@@ -22,6 +22,7 @@
                 class="tabs-list__item list-group-item" 
                 [class.active]="item === currentItem" 
                 (click)="activeItem(item)"
+                [routerLink]="item.route"
             >
                <mat-icon class="tabs-list__icon material-icons-outlined color-primary" aria-hidden="true">
                    {{item?.icon}}
