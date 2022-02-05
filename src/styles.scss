@@ -38,9 +38,11 @@ $new-project-theme: mat.define-light-theme((
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
+html, body { height: 100%; width: 100%;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 
 /* Importing font family */
-
 @font-face {
     font-family: Arimo;
     src: url('./assets/fonts/Arimo/Arimo-Regular.ttf');
@@ -53,34 +55,39 @@ $new-project-theme: mat.define-light-theme((
 }
 
 .color-primary {
-    color: #72777d;
+    color: var(--primary-color);
 }
 
 .color-secondary {
-    color: #566a85;;
+    color: var(--secondary-color);
 }
 
 .color-light {
-    color: #a0acb9;
+    color: var( --light-color);
 }
 
 .color-complementary {
-    color: #0bce9d;
+    color: var(--contrast-color);
 }
 
 .text-sm {
-    font-size: 12px;
+    font-size: var(--text-sm);
 }
  
 .text-base {
-    font-size: 14px;
+    font-size: var(--text-base);
 }
 
 .text-lg {
-    font-size: 16px;
+    font-size: var(--text-lg);
 }
 
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+    --primary-color: #72777d;
+    --secondary-color: #566a85;
+    --light-color: #a0acb9;
+    --contrast-color: #0bce9d;
+    --text-sm: 12px;
+    --text-base: 14px;
+    --text-lg: 16px;
+}
