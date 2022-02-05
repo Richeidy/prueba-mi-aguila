@@ -31,6 +31,7 @@
         justify-content: flex-start;
         align-items: center;
         border-radius: 1px;
+        cursor: pointer;
         .tabs-list__icon {
             margin: 0 15px;
         }
@@ -38,14 +39,14 @@
     .tabs-list__item.active {
         background: #e5e9ee;
         .tabs-list__icon, .tabs-list__tilte {
-            color: #566a85;
+            color: var(--secondary-color);
         }
         .tabs-list__tilte{ 
             font-weight: bold;
         }
         &::before {
             content: ' ';
-            background: #0bce9d;
+            background: var(--contrast-color);
             position: absolute;
             left: 0px;
             width: 5px;

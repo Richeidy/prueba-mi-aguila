@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { isTemplateSpan } from 'typescript';
 import { User } from '../models/user.model';
 
-type item = {
+type Item = {
   title: string,
   icon: string,
   route:string
@@ -16,7 +17,7 @@ type item = {
 export class SidebarComponent implements OnInit {
 
   @Input() user !: User;
-  items: item[] = [
+  items: Item[] = [
     { 
       title: 'Pedir Aguila',
       icon: "directions_car",
@@ -48,7 +49,8 @@ export class SidebarComponent implements OnInit {
       route: "maps"
     },
   ];
-  currentItem: string = 'Pedir Aguila';
+
+  currentItem: Item = this.items[0];
 
   constructor(
   ) { }
@@ -56,12 +58,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  activeItem(item: string) {
+  activeItem(item: Item) {
     this.currentItem = item;
-  }
-
-  getClassItem(item: string) {
-    return (this.currentItem !== item) ? 'tabs-list__item list-group-item' : 'tabs-list__item list-group-item active';
   }
 
 }
