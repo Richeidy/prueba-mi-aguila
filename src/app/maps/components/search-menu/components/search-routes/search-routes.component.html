@@ -1,0 +1,26 @@
+<div class="content-routes">
+    <div class="steps">
+        <div *ngFor="let step of steps" class="steps__step" [class.active]="activeStepRoute === step.step">
+            <span class="steps__step__number">{{step.step}}</span>
+            <span class="steps__step__title color-primary">{{step.title}}</span>
+        </div>
+    </div>
+    <hr>
+    <div class="content-routes__select">
+        <select class="selectpicker" >
+            <option selected>Bogota</option>
+        </select>
+    </div>
+    <div class="content-routes__search">
+        <mat-icon 
+            aria-hidden="true" 
+            class="content-routes__search__icon color-secondary material-icons-outlined"
+        >
+            not_listed_location
+        </mat-icon>
+        <input class="content-routes__search__input" type="text" placeholder="¿Dónde te recogemos?">
+    </div>
+    <div class="content-routes__favorites">
+        <app-favorite></app-favorite>
+    </div>
+</div>
