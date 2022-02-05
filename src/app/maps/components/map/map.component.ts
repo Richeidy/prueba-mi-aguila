@@ -20,7 +20,7 @@ export class MapComponent implements AfterViewInit {
     const map = new Map({
       container: this.mapDivElement.nativeElement, // container ID
       style: 'mapbox://styles/mapbox/streets-v11', // style URL
-      center: [-14,10], // starting position [lng, lat]
+      center: [-66.9392326 ,10.5100356,], // starting position [lng, lat]
       zoom: 14 // starting zoom
       });
   }
