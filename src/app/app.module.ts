@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SidebarModule } from './sidebar-component/sidebar.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MapsModule } from './maps/maps.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NgbModule,
     HttpClientModule,
     SidebarModule,
+    MapsModule,
     BrowserAnimationsModule
   ],
   providers: [],

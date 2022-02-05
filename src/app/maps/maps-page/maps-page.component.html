@@ -1,0 +1,8 @@
+
+<app-loading *ngIf="!readyMap; else showMap"></app-loading>
+
+<ng-template #showMap>
+    <app-map></app-map>
+    <app-search-menu></app-search-menu>
+</ng-template>
+    
