@@ -4,10 +4,12 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 
 import { LoadingComponent } from './components/loading/loading.component';
+import { MapComponent } from './components/map/map.component';
 
 @NgModule({
   declarations: [
     LoadingComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,
