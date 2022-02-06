@@ -1,0 +1,21 @@
+.fav-item {
+    display: flex;
+    margin-left: 5px;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+    .fav-item__img {
+        margin-right: 15px;
+        background: #ffc10745;
+        border-radius: 50%;
+        display: flex;
+        padding: 2px;
+        .icon {
+            color:#f3c94d;
+        }
+    }
+    .fav-item__description__direction {
+        color: #bcbcbc;
+    }
+    
+}

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { MapWaypoint } from 'src/app/models/map.model';
 
 type StepItem = {
   step: string,
@@ -10,7 +11,9 @@ type StepItem = {
   templateUrl: './search-routes.component.html',
   styleUrls: ['./search-routes.component.scss']
 })
+
 export class SearchRoutesComponent implements OnInit {
+  @Input() favoritesPlaces!:MapWaypoint[];
   
   activeStepRoute: string = '1';
   steps: StepItem[] = [

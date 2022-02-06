@@ -1,4 +1,5 @@
 .content-routes {
+    font-family: Arimo;
     .steps {
         display: flex;
         justify-content: flex-end;
@@ -55,7 +56,7 @@
             border: none;
             border-bottom: 1px solid #e5e9ee;
             margin-left: 10px;
-            font-family: Arimo;
+        
             outline: none;
         }::placeholder {
             color: var(--light-color);
@@ -64,6 +65,11 @@
     }
     .content-routes__favorites {
         padding: 10px 20px;
-        font-family: Arimo;
+        overflow-y: scroll;
+        height: 277px;
+        .content-routes__favorites__title {
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
     }
 }

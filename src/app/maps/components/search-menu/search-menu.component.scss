@@ -8,6 +8,7 @@
     box-shadow: 1px 1px 2px 1px #7c7c7c;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     .header__top {
         height: 55px;
         margin-bottom: 45px;
@@ -20,6 +21,7 @@
         display: flex;
         justify-content: space-between;
         padding: 10px;
+        background: white;
         .footer__btn {
             background: #e5e9ee;
             color: var(--primary-color);

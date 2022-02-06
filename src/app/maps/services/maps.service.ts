@@ -12,7 +12,7 @@ export class MapsService {
 
   private _map ?: Map; 
   private _apiUrl: string = 'https://api.mapbox.com/directions/v5/mapbox/driving';
-  private _initialRouteUrl: string = '../../../assets/json'
+  private _jsonsUrl: string = '../../../assets/json'
   private _accessToken: string = environment.mapboxKey;
 
   constructor(
@@ -20,7 +20,11 @@ export class MapsService {
   ) { }
 
   getRouteInitial(): Observable<MapWaypoint[]> {
-    return this.http.get<MapWaypoint[]>(`${this._initialRouteUrl}/initial-route.json`);
+    return this.http.get<MapWaypoint[]>(`${this._jsonsUrl}/initial-route.json`);
+  }
+  
+  getFavoritesPlaces(): Observable<MapWaypoint[]> {
+    return this.http.get<MapWaypoint[]>(`${this._jsonsUrl}/way-points.json`);
   }
 
   getRouteMap(coords: WaypointMap): Observable<MapModel> {

@@ -3,7 +3,7 @@
 
 <ng-template #showMap>
     <app-map [initialroute]="initialroute" [initialPoints]="initialPoints"></app-map>
-    <app-search-menu></app-search-menu>
+    <app-search-menu  [favoritesPlaces]="favoritesPlaces"></app-search-menu>
 </ng-template>
     
 <router-outlet></router-outlet>

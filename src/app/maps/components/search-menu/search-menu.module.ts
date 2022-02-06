@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SearchMenuComponent } from './search-menu.component';
 import { SearchRoutesComponent } from './components/search-routes/search-routes.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FavoriteComponent } from './components/favorite/favorite.component';
   ],
   imports: [
     CommonModule,
-    MatIconModule
+    MatIconModule,
+    RouterModule
   ],
   exports: [
     SearchMenuComponent

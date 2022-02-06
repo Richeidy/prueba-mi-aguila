@@ -21,6 +21,7 @@
         <input class="content-routes__search__input" type="text" placeholder="¿Dónde te recogemos?">
     </div>
     <div class="content-routes__favorites">
-        <app-favorite></app-favorite>
+        <div class="content-routes__favorites__title color-secondary ">Favoritos</div>
+        <app-favorite *ngFor="let place of favoritesPlaces" [place]="place"></app-favorite>
     </div>
 </div>

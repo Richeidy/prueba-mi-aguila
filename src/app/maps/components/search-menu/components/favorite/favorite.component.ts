@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MapWaypoint } from '../../../../../models/map.model';
 
 @Component({
   selector: 'app-favorite',
@@ -7,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoriteComponent implements OnInit {
 
+  @Input() place!:MapWaypoint;
+ 
   constructor() { }
 
   ngOnInit(): void {
