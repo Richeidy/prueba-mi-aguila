@@ -41,6 +41,6 @@ export interface Waypoint {
 }
 
 export interface WaypointMap {
-    lon: number;
-    lat: number;
+    origin:  number[];
+    destiny: number[];
 }

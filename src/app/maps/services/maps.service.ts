@@ -11,26 +11,30 @@ import { environment } from 'src/environments/environment';
 export class MapsService {
 
   private _map ?: Map; 
-  private _urlApi: string = 'https://api.mapbox.com/directions/v5/mapbox/driving';
+  private _apiUrl: string = 'https://api.mapbox.com/directions/v5/mapbox/driving';
+  private _initialRouteUrl: string = '../../../assets/json'
   private _accessToken: string = environment.mapboxKey;
 
   constructor(
     private http: HttpClient
   ) { }
-  
 
-  getRouteMap(coords: WaypointMap[]): Observable<MapModel> {
-    const coordsUrl: string = `${coords[0].lon},${coords[0].lat};${coords[1].lon},${coords[2].lat}`;
+  getRouteInitial(): Observable<WaypointMap[]> {
+    return this.http.get<WaypointMap[]>(`${this._initialRouteUrl}/initial-route.json`);
+  }
+
+  getRouteMap(coords: WaypointMap): Observable<MapModel> {
+
+    let coordsUrl: string = `${coords.origin[0]},${coords.origin[1]};${coords.destiny[0]},${coords.destiny[1]}`;
+
     const params = new HttpParams()
       .set('alternatives', false)
       .set('geometries', 'geojson')
       .set('overview', 'simplified')
       .set('steps',false)
-      .set('access_token',this._accessToken)
-
-    return this.http.get<MapModel>(`${this._urlApi}/${coordsUrl}${params}`);
+      .set('access_token',this._accessToken);
+    return this.http.get<MapModel>(`${this._apiUrl}/${coordsUrl}?${params}`);
   }
-
 
   get readyMap(): boolean {
     return !!this._map;

@@ -8,13 +8,13 @@ import { User } from '../models/user.model';
 })
 export class UserService {
 
-  private userUrl: string = '../../assets/json';
+  private _userUrl: string = '../../assets/json';
   constructor(
     private http: HttpClient
   ) { }
 
   getUser(): Observable<User> {
-    const url = `${this.userUrl}/user.json`;
+    const url = `${this._userUrl}/user.json`;
     return this.http.get<User>(url);
   }
 }

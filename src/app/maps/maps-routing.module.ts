@@ -5,7 +5,15 @@ import { MapsPageComponent } from './maps-page/maps-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: MapsPageComponent
+    component: MapsPageComponent,
+    children: [
+      {
+        path: 'origin/:place'
+      },
+      {
+        path: 'destiny/:place'
+      }
+    ]
   }
 ];
 
