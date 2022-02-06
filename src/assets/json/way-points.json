@@ -1,0 +1,50 @@
+[
+    {
+        "direction": "Bogotá, Cundinamarca, Colombia",
+        "name": "Bogotá",
+        "fav": true,
+        "location": [-74.07234143293759, 4.711150508986359]
+    },
+    {
+        "direction": "Cra. 15 #8090, Bogotá, Cundinamarca, Colombia",
+        "name": "Mi Águila",
+        "fav": true,
+        "location": [-74.05663441773083,4.6690632139816755]
+    },
+    {
+        "direction": "Av. Calle 53 y Av. Esmeralda #s/n, Bogotá, Cundinamarca, Colombia",
+        "name": "Parque Central Simón Bolivar",
+        "fav": true,
+        "location": [-74.0934848337853, 4.66351119382087]
+    },
+    {
+        "direction": "Ac. 26 ##103-9, Fontibón, Bogotá, Colombia",
+        "name": "Aeropuerto Internacional El Dorado Luis Carlos Galán Sarmiento",
+        "fav": true,
+        "location": [ -74.14566989080518, 4.707480731304744]
+    },
+    {
+        "direction": "Parque La Colina Centro Comercial",
+        "name": "Parque La Colina Centro Comercial",
+        "fav": true,
+        "location": [-74.06807895014985, 4.741696349328271]
+    },
+    {
+        "direction": "Autopista Nte. #224-60, Bogotá, Cundinamarca, Colombia",
+        "name": "Multiparque Parque de Diversiones",
+        "fav": true,
+        "location": [-74.03374667558464, 4.81593839498642]
+    },
+    {
+        "direction": "Cra. 19 ##19B-16 sur, Bogotá, Colombia",
+        "name": "Plaza Mercado Restrepo",
+        "fav": true,
+        "location": [-74.10035129074448, 4.591477336207524]
+    },
+    {
+        "direction": "Cra. 15 #124-30, Bogotá, Cundinamarca, Colombia",
+        "name": "Centro Comercial Unicentro Bogotá",
+        "fav": true,
+        "location": [-74.04105491986681, 4.703244584556082]
+    }
+]

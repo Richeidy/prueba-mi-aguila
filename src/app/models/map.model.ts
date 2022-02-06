@@ -40,6 +40,13 @@ export interface Waypoint {
     location: number[];
 }
 
+export interface MapWaypoint {
+    direction: string;
+    name:      string;
+    fav?:      boolean;
+    location:  number[];
+}
+
 export interface WaypointMap {
     origin:  number[];
     destiny: number[];

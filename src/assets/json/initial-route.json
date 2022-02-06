@@ -1,7 +1,16 @@
 
 [
     {
-        "origin": [-74.07220159667001,4.7112141320921035],
-        "destiny": [-74.05623708941067, 4.6699822988856745]
+        "direction": "Bogotá, Cundinamarca, Colombia",
+        "name": "Bogotá",
+        "fav": true,
+        "location": [-74.07234143293759, 4.711150508986359]
+    },
+    {
+        "direction": "Cra. 15 #8090, Bogotá, Cundinamarca, Colombia",
+        "name": "Mi Águila",
+        "fav": true,
+        "location": [-74.05663441773083,4.6690632139816755]
     }
+
 ]

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { MapsService } from '../services/maps.service';
-import { Route, MapModel, WaypointMap } from '../../models/map.model';
+import { Route, MapModel, WaypointMap, MapWaypoint, Waypoint } from '../../models/map.model';
 
 @Component({
   selector: 'app-maps-page',
@@ -13,7 +13,7 @@ export class MapsPageComponent implements OnInit  {
 
   readyMap: boolean = true;
   initialroute !: MapModel;
-  initialPoint!: WaypointMap; 
+  initialPoints!: MapWaypoint[]; 
 
   constructor(
     private mapService:MapsService,
@@ -28,8 +28,12 @@ export class MapsPageComponent implements OnInit  {
     this.mapService.getRouteInitial()
       .pipe(
         switchMap((initialPoints) => {
-          this.initialPoint = initialPoints[0];
-          return this.mapService.getRouteMap(initialPoints[0]);
+          this.initialPoints = initialPoints;
+          const wayPoints: WaypointMap = {
+            origin: initialPoints[0].location,
+            destiny: initialPoints[1].location
+          };
+          return this.mapService.getRouteMap(wayPoints);
         }),
       )
       .subscribe(route =>{

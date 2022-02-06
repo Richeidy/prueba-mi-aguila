@@ -2,7 +2,7 @@
 <app-loading *ngIf="!readyMap; else showMap"></app-loading>
 
 <ng-template #showMap>
-    <app-map [initialroute]="initialroute"></app-map>
+    <app-map [initialroute]="initialroute" [initialPoints]="initialPoints"></app-map>
     <app-search-menu></app-search-menu>
 </ng-template>
     
