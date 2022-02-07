@@ -74,4 +74,5 @@ export class SearchMenuComponent implements OnInit {
   success() {
     this.emitSelectedWayPoints([this.originPlaceSelected,this.destinyPlaceSelected])
   }
+
 }
