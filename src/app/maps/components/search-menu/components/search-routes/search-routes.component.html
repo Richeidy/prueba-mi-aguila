@@ -1,6 +1,6 @@
 <div class="content-routes">
     <div class="steps">
-        <div *ngFor="let step of steps" class="steps__step" [class.active]="activeStepRoute === step.step">
+        <div *ngFor="let step of steps" class="steps__step" [class.active]="page === step.step">
             <span class="steps__step__number">{{step.step}}</span>
             <span class="steps__step__title color-primary">{{step.title}}</span>
         </div>
@@ -22,6 +22,10 @@
     </div>
     <div class="content-routes__favorites">
         <div class="content-routes__favorites__title color-secondary ">Favoritos</div>
-        <app-favorite *ngFor="let place of favoritesPlaces" [place]="place"></app-favorite>
+        <app-favorite 
+            *ngFor="let place of favoritesPlaces" 
+            [place]="place"
+            (onSelectPlace)="emitPlaceSelected($event)"
+        ></app-favorite>
     </div>
 </div>

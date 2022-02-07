@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import { AnySourceData, LngLatLike, Map, Marker, Popup } from 'mapbox-gl';
-import { Geometry, Waypoint } from 'src/app/models/map.model';
-import { MapsService } from '../../services/maps.service';
-import { MapModel, WaypointMap, MapWaypoint } from '../../../models/map.model';
+import { Geometry} from 'src/app/models/map.model';
+import { MapModel, MapWaypoint } from '../../../models/map.model';
 
 @Component({
   selector: 'app-map',
@@ -13,7 +12,7 @@ export class MapComponent implements AfterViewInit {
 
   @ViewChild('mapDiv') mapDivElement!: ElementRef;
 
-  @Input('pointInMap') set pointInMap(pointInMap:MapWaypoint) {
+  @Input('wayPointPrint') set pointInMap(pointInMap:MapWaypoint) {
     if(pointInMap) {
       this.pointMarker(pointInMap);
     }
@@ -30,7 +29,8 @@ export class MapComponent implements AfterViewInit {
       this.printPolyLine(initialroute.routes[0].geometry)
     }
   }
-
+  polyLine: boolean = false;
+  markers: Marker[] = [];
   map !: Map;
   constructor(
   ) { }
@@ -56,12 +56,18 @@ export class MapComponent implements AfterViewInit {
   }
 
   clearMap() {
-    if ( this.map.getLayer('RouteString') ) {
+    if(this.map.getLayer('RouteString') ) {
       this.map.removeLayer('RouteString');
       this.map.removeSource('RouteString');
+      this.clearMarkers();
+      this.flyTo([-74.07199508835522 ,4.710934376039312]);
     }
   }
-
+  clearMarkers() {
+    if(this.markers !== null) {
+      this.markers.forEach(marker => marker.remove());
+    }
+  }
   createDataSource(geometryLine: Geometry) {
     const coords = geometryLine.coordinates;
     const sourceData: AnySourceData = {
@@ -101,9 +107,9 @@ export class MapComponent implements AfterViewInit {
           'line-width': 3
         }
       })
-      .zoomIn();
+      .setCenter([-74.07199508835522 ,4.710934376039312])
     });
-    
+    this.polyLine = true;
   }
 
   createPopup(point: MapWaypoint) {
@@ -120,15 +126,15 @@ export class MapComponent implements AfterViewInit {
   }
   
   pointMarker(point: MapWaypoint) {
-    console.log(point, 'aqui');
-    
+    if(this.polyLine) this.clearMap();
     const popup= this.createPopup(point);
-    this.map.on('load', () => {
-      new Marker({color: '#0bce9d'})
-        .setLngLat([point.location[0], point.location[1]])
-        .setPopup(popup)
-        .addTo( this.map );
-    })
+    const marker =  new Marker({color: '#0bce9d'})
+      .setLngLat([point.location[0], point.location[1]])
+      .setPopup(popup)
+      .addTo( this.map );
+    this.markers.push(marker);
+   // console.log(point, 'aqui', this.markers);
+    
     
   }
 }

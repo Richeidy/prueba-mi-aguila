@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, tap } from 'rxjs/operators';
 import { MapsService } from '../services/maps.service';
@@ -7,14 +7,18 @@ import { Route, MapModel, WaypointMap, MapWaypoint, Waypoint } from '../../model
 @Component({
   selector: 'app-maps-page',
   templateUrl: './maps-page.component.html',
-  styleUrls: ['./maps-page.component.scss']
+  styleUrls: ['./maps-page.component.scss'],
+  providers:[{
+    provide: 'favoritePlaceSelected',
+    useValue: new EventEmitter
+  }]
 })
 export class MapsPageComponent implements OnInit  {
   readyMap:boolean = true;
-  initialroute !: MapModel;
-  initialPoints !: MapWaypoint[]; 
-  favoritesPlaces !: MapWaypoint[];
-
+  initialroute!: MapModel;
+  initialPoints!: MapWaypoint[]; 
+  favoritesPlaces!: MapWaypoint[];
+  wayPointPrint!: MapWaypoint;
   constructor(
     private mapService:MapsService,
     private activatedRoute: ActivatedRoute,
@@ -22,7 +26,6 @@ export class MapsPageComponent implements OnInit  {
 
   ngOnInit() {
     this.getInitialRoute();
-    this.getFavoritesPlaces();
   }
 
   getInitialRoute() {
@@ -42,9 +45,8 @@ export class MapsPageComponent implements OnInit  {
       });
   }
 
-  getFavoritesPlaces() {
-    this.mapService.getFavoritesPlaces()
-      .subscribe(placesFav => this.favoritesPlaces = placesFav);
+  printMarkerPlace(WayPointPlace: MapWaypoint) {
+    this.wayPointPrint= WayPointPlace;
   }
 
 }

@@ -8,10 +8,12 @@ const routes: Routes = [
     component: MapsPageComponent,
     children: [
       {
-        path: 'origin/:place'
+        path: 'origin/:origin',
+        component: MapsPageComponent
       },
       {
-        path: 'destiny/:place'
+        path: 'origin/:origin/destiny/:destiny',
+        component: MapsPageComponent
       }
     ]
   }

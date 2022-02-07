@@ -1,13 +1,15 @@
-<div class="fav-item" >
+<button class="fav-item btn" 
+        (click)="emitPlace()" 
+        [class.active]="currentPlace === place">
     <div class="fav-item__img">
         <mat-icon aria-hidden="true"  class="icon material-icons-outlined">grade</mat-icon>
     </div>
     <div class="fav-item__description">
-        <div class="fav-item__description__name color-light">
+        <div class="fav-item__description__name color-light text-base">
             {{place?.name}}
         </div>
         <div class="fav-item__description__direction text-sm">
             {{place?.direction}}
         </div>
     </div>
-</div>
+</button>

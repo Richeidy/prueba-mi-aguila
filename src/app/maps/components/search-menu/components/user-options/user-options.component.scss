@@ -21,7 +21,7 @@
             padding: 4px;
             margin: auto;
             margin-bottom: 5px;
-        }  
+        }
         .btn.active {
             .icon {
                 background: #0bce9d1f;
@@ -29,11 +29,7 @@
             mat-icon, div {
                 color:var(--contrast-color)
             }
+        }:hover,:focus{
+            box-shadow: none;
         }
-        .btn:focus {
-            box-shadow: 0;
-        }
-        
-        
-       
     }

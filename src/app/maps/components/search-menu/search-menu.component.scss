@@ -26,5 +26,15 @@
             background: #e5e9ee;
             color: var(--primary-color);
         }
+        .hide{
+            display: none;
+        }
+        .success {
+            background: #0bce9d1f;
+            color: var(--contrast-color);
+        }
+    }
+    .slot-end{
+        justify-content: end;
     }
 }

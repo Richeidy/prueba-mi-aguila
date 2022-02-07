@@ -1,9 +1,9 @@
 .fav-item {
     display: flex;
-    margin-left: 5px;
     align-items: center;
-    margin-bottom: 15px;
-    cursor: pointer;
+    padding: 0;
+    width: 100%;
+    padding: 5px;
     .fav-item__img {
         margin-right: 15px;
         background: #ffc10745;
@@ -14,8 +14,19 @@
             color:#f3c94d;
         }
     }
-    .fav-item__description__direction {
-        color: #bcbcbc;
+    .fav-item__description{
+        text-align: left;
+        line-height: 16px;
+        .fav-item__description__direction {
+            color: #bcbcbc;
+            margin-top: 5px;
+        }
     }
-    
+    .active {
+        background: #f6f6f6;
+    }
+}:hover,:focus{
+    background: #f6f6f6;
+    box-shadow: none;
 }
+

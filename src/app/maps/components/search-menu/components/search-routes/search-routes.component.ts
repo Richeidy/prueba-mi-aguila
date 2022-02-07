@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { MapWaypoint } from 'src/app/models/map.model';
 
 type StepItem = {
-  step: string,
+  step: number,
   title: string
 }
 
@@ -14,32 +14,37 @@ type StepItem = {
 
 export class SearchRoutesComponent implements OnInit {
   @Input() favoritesPlaces!:MapWaypoint[];
-  
-  activeStepRoute: string = '1';
+  @Input() page!: number;
+  @Output() onSelectFavoritePlace: EventEmitter<MapWaypoint> = new EventEmitter;
+ 
   steps: StepItem[] = [
     {
-      step: '1',
+      step: 1,
       title: 'Origen'
     },{
-      step: '2',
+      step: 2,
       title: 'Destino'
     },{
-      step: '3',
+      step: 3,
       title: ''
     },{
-      step: '4',
+      step: 4,
       title: ''
     },{
-      step: '5',
+      step: 5,
       title: ''
     },{
-      step: '6',
+      step: 6,
       title: ''
     }
   ]
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit(): void {
   }
 
+  emitPlaceSelected(placeFavorite: MapWaypoint) {
+    this.onSelectFavoritePlace.emit(placeFavorite);
+  }
 }
