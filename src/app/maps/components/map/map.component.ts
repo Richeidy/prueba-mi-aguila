@@ -19,7 +19,6 @@ export class MapComponent implements AfterViewInit {
     }
   }
   @Input('initialPoints') set initialPoints(initialPoints:MapWaypoint[]) {
-   
     if(initialPoints) {
       initialPoints.forEach((point, index)=> {
         const typePoint = index == 0 ? 'origin' : 'destiny'
@@ -30,13 +29,16 @@ export class MapComponent implements AfterViewInit {
   }
   @Input('printPolyLine') set _route(route:MapModel) {
     if(route) {
+      this.polyLineData = route.routes[0].geometry;
       this.printPolyLine(route.routes[0].geometry);
     }
   }
+  polyLineData!: Geometry;
   polyLine: boolean = false;
   markerOrigin!: Marker;
   markerDestiny!: Marker; 
   map !: Map;
+  isLoadedMap : boolean = false;
 
   constructor(
   ) { }
@@ -51,7 +53,10 @@ export class MapComponent implements AfterViewInit {
       style: 'mapbox://styles/mapbox/streets-v11', 
       center: [-74.07199508835522 ,4.710934376039312], 
       zoom: 12 
-    });
+    }).on('load', () => {
+      this.isLoadedMap = true;
+      this.printPolyLine(this.polyLineData);
+    })
   }
 
   flyTo( coords: LngLatLike ) {
@@ -95,9 +100,9 @@ export class MapComponent implements AfterViewInit {
   }
 
   printPolyLine(geometryLine: Geometry) {
-    this.clearMap();
-    const dataSource = this.createDataSource(geometryLine);
-    this.map.on('load', () => {
+    if(this.isLoadedMap) {
+      this.clearMap();
+      const dataSource = this.createDataSource(geometryLine);
       this.map.addSource('RouteString', dataSource);
       this.map.addLayer({
         id: 'RouteString',
@@ -111,9 +116,9 @@ export class MapComponent implements AfterViewInit {
           'line-color': 'red',
           'line-width': 3
         }
-      })
-    });
-    this.polyLine = true;
+      });
+      this.polyLine = true;
+    }
   }
 
   createPopup(point: MapWaypoint) {
@@ -128,6 +133,7 @@ export class MapComponent implements AfterViewInit {
     `);
     return popup;
   }
+  
   createMarker(point: MapWaypoint) {
     const popup= this.createPopup(point);
     return new Marker({color: '#0bce9d'})
@@ -137,11 +143,9 @@ export class MapComponent implements AfterViewInit {
   }
   
   pointMarker(point: typeCoordinates) {
-    if(this.polyLine) {
+    if(this.polyLine && this.markerOrigin && this.markerDestiny) {
       this.clearMap();
     }
-   
-    
     this.clearMarkers(point.type);
     if(point.type === 'origin') {
       this.markerOrigin = this.createMarker(point.wayPoint);

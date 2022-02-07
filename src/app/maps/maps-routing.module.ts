@@ -5,17 +5,12 @@ import { MapsPageComponent } from './maps-page/maps-page.component';
 const routes: Routes = [
   {
     path: '',
+    redirectTo:'step/1',
+    pathMatch: 'full'
+  },
+  {
+    path: 'step/:id',
     component: MapsPageComponent,
-    children: [
-      {
-        path: 'origin/:origin',
-        component: MapsPageComponent
-      },
-      {
-        path: 'origin/:origin/destiny/:destiny',
-        component: MapsPageComponent
-      }
-    ]
   }
 ];
 

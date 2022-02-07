@@ -1,6 +1,10 @@
 <div class="content-routes">
     <div class="steps">
-        <div *ngFor="let step of steps" class="steps__step" [class.active]="page === step.step">
+        <div *ngFor="let step of steps" 
+            class="steps__step" 
+            [class.active]="page === step.step"
+            (click)="changePage(step)"
+        >
             <span class="steps__step__number">{{step.step}}</span>
             <span class="steps__step__title color-primary">{{step.title}}</span>
         </div>
@@ -8,7 +12,7 @@
     <hr>
     <div class="content-routes__select">
         <select class="selectpicker" >
-            <option selected>Bogota</option>
+            <option selected>Bogotá</option>
         </select>
     </div>
     <div class="content-routes__search">
@@ -18,9 +22,9 @@
         >
             not_listed_location
         </mat-icon>
-        <input class="content-routes__search__input" type="text" placeholder="¿Dónde te recogemos?">
+        <app-search-input [placeholder]="placeholder"></app-search-input>
     </div>
-    <div class="content-routes__favorites">
+    <div *ngIf="!loading" class="content-routes__favorites">
         <div class="content-routes__favorites__title color-secondary ">Favoritos</div>
         <app-favorite 
             *ngFor="let place of favoritesPlaces" 
@@ -28,4 +32,5 @@
             (onSelectPlace)="emitPlaceSelected($event)"
         ></app-favorite>
     </div>
+    <div *ngIf="loading" class="content-routes__favorites__loading"></div>
 </div>

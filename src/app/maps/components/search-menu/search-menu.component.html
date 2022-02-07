@@ -7,22 +7,26 @@
         <app-search-routes 
             [favoritesPlaces]="favoritesPlaces" 
             (onSelectFavoritePlace)="emitPlaceFavoriteSelected($event)"
+            (onChangePage)="onChangePage($event)"
             [page]="activePage"
         ></app-search-routes>
     </div>
     <div class="footer"  [class.slot-end]="activePage === 1">
         <button class="footer__btn btn material-icons-outlined"     
                 [class.hide]="activePage === 1"
-                (click)="changePage(-1)"
+                (click)="backPage()"
         >
             <mat-icon aria-hidden="true">west</mat-icon>
         </button>
         <button class="footer__btn btn material-icons-outlined" 
-                [class.success]="destinyPlaceSelected"
+                [class.success]="originPlaceSelected"
                 [disabled]="!originPlaceSelected"
-                (click)="changePage(1)"
+                (click)="nextPage()"
         >
-            <mat-icon aria-hidden="true">east</mat-icon>
+            <mat-icon aria-hidden="true">
+                east
+            </mat-icon>
+           
         </button>
     </div>
 </div>

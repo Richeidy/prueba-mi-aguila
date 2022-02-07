@@ -6,6 +6,8 @@ import { SearchMenuComponent } from './search-menu.component';
 import { SearchRoutesComponent } from './components/search-routes/search-routes.component';
 import { FavoriteComponent } from './components/favorite/favorite.component';
 import { RouterModule } from '@angular/router';
+import { SearchInputComponent } from './components/search-input/search-input.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -13,12 +15,14 @@ import { RouterModule } from '@angular/router';
     SearchMenuComponent,
     UserOptionsComponent,
     SearchRoutesComponent,
-    FavoriteComponent
+    FavoriteComponent,
+    SearchInputComponent
   ],
   imports: [
     CommonModule,
     MatIconModule,
-    RouterModule
+    RouterModule,
+    FormsModule
   ],
   exports: [
     SearchMenuComponent

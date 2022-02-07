@@ -1,8 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { MapsService } from '../services/maps.service';
-import { Route, MapModel, WaypointMap, MapWaypoint, Waypoint, typeCoordinates } from '../../models/map.model';
+import { MapModel, WaypointMap, MapWaypoint, Waypoint, typeCoordinates } from '../../models/map.model';
 
 @Component({
   selector: 'app-maps-page',
@@ -21,40 +20,26 @@ export class MapsPageComponent implements OnInit  {
   wayPointPrint!: typeCoordinates;
   constructor(
     private mapService:MapsService,
-    private activatedRoute: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.getInitialRoute();
-    this.getRoute();
   }
   
-  getRoute() {
-    this.activatedRoute.params.subscribe(({origin, destiny}) => {
-      console.log(origin,destiny);
-      if(origin && destiny) {
-        const wayPointOrigin = this.mapService.getFavoritesPlacesByName(origin);
-        const wayPointDestiny = this.mapService.getFavoritesPlacesByName(destiny);
-        this.printPoliLineData(wayPointOrigin,wayPointDestiny);
-        this.initialPoints = [wayPointOrigin,wayPointDestiny];
-      }
-      if(origin) {
-        let wayPoint = this.mapService.getFavoritesPlacesByName(origin);
-        this.printMarkerPlace({wayPoint, type: 'origin'});
-      }
-    });
-  }
-
   printPoliLineData(waypointOrigin: any,waypointDestiny: any) {
     const wayPoints: WaypointMap = {
-      origin: waypointOrigin[0].location,
-      destiny: waypointDestiny[1].location
+      origin: waypointOrigin.location,
+      destiny: waypointDestiny.location
     };
     this.mapService.getRouteMap(wayPoints).subscribe(route => {
       this.printPolyLine = route;
     });
   }
 
+  onSelectedWayPoints(points: MapWaypoint[]) {
+    this.printPoliLineData(points[0],points[1]);
+  }
+  
   getInitialRoute() {
     this.mapService.getRouteInitial()
       .pipe(

@@ -13,10 +13,21 @@ type StepItem = {
 })
 
 export class SearchRoutesComponent implements OnInit {
-  @Input() favoritesPlaces!:MapWaypoint[];
-  @Input() page!: number;
+  
   @Output() onSelectFavoritePlace: EventEmitter<MapWaypoint> = new EventEmitter;
- 
+  @Output() onChangePage: EventEmitter<number> = new EventEmitter;
+  @Input() favoritesPlaces!:MapWaypoint[];
+  @Input('page') set _page(page:number) {
+    this.page = page;
+    this.placeholder = (page == 1) ? '¿Dónde te recogemos?': '¿Dónde te dejamos?'
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 100);
+  }
+  loading:boolean = false;
+  page: number = 0;
+  placeholder:string = "";
   steps: StepItem[] = [
     {
       step: 1,
@@ -38,15 +49,21 @@ export class SearchRoutesComponent implements OnInit {
       title: ''
     }
   ]
+  
   constructor() {
    }
 
   ngOnInit(): void {
-    console.log(this.favoritesPlaces);
-    
   }
 
   emitPlaceSelected(placeFavorite: MapWaypoint) {
     this.onSelectFavoritePlace.emit(placeFavorite);
   }
+
+  changePage(step:StepItem) {
+    if(step.step <= 2 ) {
+      this.onChangePage.emit(step.step);
+    }
+  }
+  
 }
