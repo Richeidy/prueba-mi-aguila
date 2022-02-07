@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import { AnySourceData, LngLatLike, Map, Marker, Popup } from 'mapbox-gl';
-import { Geometry} from 'src/app/models/map.model';
+import { Geometry, typeCoordinates} from 'src/app/models/map.model';
 import { MapModel, MapWaypoint } from '../../../models/map.model';
 
 @Component({
@@ -12,26 +12,32 @@ export class MapComponent implements AfterViewInit {
 
   @ViewChild('mapDiv') mapDivElement!: ElementRef;
 
-  @Input('wayPointPrint') set pointInMap(pointInMap:MapWaypoint) {
+  @Input('wayPointPrint') set pointInMap(pointInMap:typeCoordinates) {
     if(pointInMap) {
       this.pointMarker(pointInMap);
+      this.flyTo([pointInMap.wayPoint.location[0], pointInMap.wayPoint.location[1]]);
     }
   }
   @Input('initialPoints') set initialPoints(initialPoints:MapWaypoint[]) {
+   
     if(initialPoints) {
-      initialPoints.forEach(point => {
-        this.pointMarker(point);
+      initialPoints.forEach((point, index)=> {
+        const typePoint = index == 0 ? 'origin' : 'destiny'
+        this.pointMarker({wayPoint: point, type: typePoint});
       });
+    
     }
   }
-  @Input('initialroute') set _initialroute(initialroute:MapModel) {
-    if(initialroute) {
-      this.printPolyLine(initialroute.routes[0].geometry)
+  @Input('printPolyLine') set _route(route:MapModel) {
+    if(route) {
+      this.printPolyLine(route.routes[0].geometry);
     }
   }
   polyLine: boolean = false;
-  markers: Marker[] = [];
+  markerOrigin!: Marker;
+  markerDestiny!: Marker; 
   map !: Map;
+
   constructor(
   ) { }
 
@@ -59,14 +65,13 @@ export class MapComponent implements AfterViewInit {
     if(this.map.getLayer('RouteString') ) {
       this.map.removeLayer('RouteString');
       this.map.removeSource('RouteString');
-      this.clearMarkers();
-      this.flyTo([-74.07199508835522 ,4.710934376039312]);
+      this.clearMarkers('origin');
+      this.clearMarkers('destiny');
     }
   }
-  clearMarkers() {
-    if(this.markers !== null) {
-      this.markers.forEach(marker => marker.remove());
-    }
+  clearMarkers(marker:string) {
+    if(this.markerOrigin && marker === 'origin') this.markerOrigin.remove();
+    if(this.markerDestiny && marker === 'destiny') this.markerDestiny.remove();
   }
   createDataSource(geometryLine: Geometry) {
     const coords = geometryLine.coordinates;
@@ -107,7 +112,6 @@ export class MapComponent implements AfterViewInit {
           'line-width': 3
         }
       })
-      .setCenter([-74.07199508835522 ,4.710934376039312])
     });
     this.polyLine = true;
   }
@@ -124,17 +128,26 @@ export class MapComponent implements AfterViewInit {
     `);
     return popup;
   }
-  
-  pointMarker(point: MapWaypoint) {
-    if(this.polyLine) this.clearMap();
+  createMarker(point: MapWaypoint) {
     const popup= this.createPopup(point);
-    const marker =  new Marker({color: '#0bce9d'})
+    return new Marker({color: '#0bce9d'})
       .setLngLat([point.location[0], point.location[1]])
       .setPopup(popup)
       .addTo( this.map );
-    this.markers.push(marker);
-   // console.log(point, 'aqui', this.markers);
+  }
+  
+  pointMarker(point: typeCoordinates) {
+    if(this.polyLine) {
+      this.clearMap();
+    }
+   
     
-    
+    this.clearMarkers(point.type);
+    if(point.type === 'origin') {
+      this.markerOrigin = this.createMarker(point.wayPoint);
+    }
+    if(point.type === 'destiny') {
+      this.markerDestiny = this.createMarker(point.wayPoint);
+    }
   }
 }

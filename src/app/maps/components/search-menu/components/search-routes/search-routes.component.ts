@@ -42,6 +42,8 @@ export class SearchRoutesComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    console.log(this.favoritesPlaces);
+    
   }
 
   emitPlaceSelected(placeFavorite: MapWaypoint) {

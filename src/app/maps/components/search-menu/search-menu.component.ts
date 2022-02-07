@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MapWaypoint, Waypoint } from '../../../models/map.model';
+import { MapWaypoint, typeCoordinates, Waypoint } from '../../../models/map.model';
 import { ActivatedRoute } from '@angular/router';
 import { MapsService } from '../../services/maps.service';
 import { switchMap } from 'rxjs';
@@ -11,8 +11,9 @@ import { switchMap } from 'rxjs';
 })
 export class SearchMenuComponent implements OnInit {
 
-  @Output() onSelectFavPlace: EventEmitter<MapWaypoint> = new EventEmitter;
+  @Output() onSelectFavPlace: EventEmitter<typeCoordinates> = new EventEmitter;
   @Output() onSelectedWayPoints: EventEmitter<MapWaypoint[]> = new EventEmitter;
+  
   
   favoritesPlaces!: MapWaypoint[];
   activePage: number = 1;
@@ -20,41 +21,17 @@ export class SearchMenuComponent implements OnInit {
   destinyPlaceSelected!: MapWaypoint;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private mapService: MapsService
   ) { }
 
-  ngOnInit(): void {
-
+  ngOnInit() {
     this.getFavoritesPlaces();
-    this.getRoute();
   }
 
   getFavoritesPlaces() {
-    this.mapService.getFavoritesPlaces()
-      .subscribe(placesFav => this.favoritesPlaces = placesFav);
+    this.mapService.getFavoritesPlaces().subscribe(places => this.favoritesPlaces = places);
   }
-
-  getRoute() {
-    this.activatedRoute.params.subscribe(({origin, destiny}) => {
-      console.log(origin,destiny);
-      if(origin && destiny) {
-        this.activePage = 2;
-        const WaypointOrigin = this.searchWayPointInPlaces(origin);
-        const WaypointDestiny = this.searchWayPointInPlaces(destiny);
-        this.emitSelectedWayPoints([WaypointOrigin,WaypointDestiny]);
-      }
-      if(origin) {
-        const WaypointOrigin = this.searchWayPointInPlaces(origin);
-        this.emitPlaceFavoriteSelected(WaypointOrigin)
-      }
-    });
-  }
-
-  searchWayPointInPlaces(WaypointName: string) {
-    return this.favoritesPlaces.filter(place => place.name == WaypointName)[0];
-  }
-
+  
   emitSelectedWayPoints(wayPointsSelected: MapWaypoint[]){
     this.onSelectedWayPoints.emit(wayPointsSelected)
   }
@@ -62,8 +39,12 @@ export class SearchMenuComponent implements OnInit {
   emitPlaceFavoriteSelected(placeFavorite: MapWaypoint) {
     if(this.activePage === 1) {
       this.originPlaceSelected = placeFavorite;
+      this.onSelectFavPlace.emit({wayPoint: placeFavorite, type: 'origin'});
     }
-    this.onSelectFavPlace.emit(placeFavorite);
+    if(this.activePage === 2) {
+      this.originPlaceSelected = placeFavorite;
+      this.onSelectFavPlace.emit({wayPoint: placeFavorite, type: 'destiny'});
+    }
   }
 
   changePage(value: number) {

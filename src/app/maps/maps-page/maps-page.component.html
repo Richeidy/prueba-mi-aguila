@@ -2,7 +2,7 @@
 <app-loading *ngIf="!readyMap; else showMap"></app-loading>
 
 <ng-template #showMap>
-    <app-map [initialroute]="initialroute" [initialPoints]="initialPoints" [wayPointPrint]="wayPointPrint"></app-map>
+    <app-map [printPolyLine]="printPolyLine" [initialPoints]="initialPoints" [wayPointPrint]="wayPointPrint"></app-map>
     <app-search-menu (onSelectFavPlace)="printMarkerPlace($event)"></app-search-menu>
 </ng-template>
     

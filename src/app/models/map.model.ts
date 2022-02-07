@@ -51,3 +51,7 @@ export interface WaypointMap {
     origin:  number[];
     destiny: number[];
 }
+export interface typeCoordinates {
+    wayPoint: MapWaypoint ;
+    type: "origin" | "destiny";
+}

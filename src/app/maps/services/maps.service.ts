@@ -27,6 +27,14 @@ export class MapsService {
     return this.http.get<MapWaypoint[]>(`${this._jsonsUrl}/way-points.json`);
   }
 
+  getFavoritesPlacesByName(namePlace:string): MapWaypoint {
+    let placeFav!: MapWaypoint;
+    this.getFavoritesPlaces().subscribe(places => {
+      placeFav = places.find(place => place.name === namePlace)!;
+    });
+    return placeFav;
+  }
+
   getRouteMap(coords: WaypointMap): Observable<MapModel> {
     let coordsUrl: string = `${coords.origin[0]},${coords.origin[1]};${coords.destiny[0]},${coords.destiny[1]}`;
     const params = new HttpParams()
